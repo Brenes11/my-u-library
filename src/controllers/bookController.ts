@@ -1,5 +1,3 @@
-// /src/controllers/bookController.ts
-
 import { Request, Response } from 'express';
 import { getUserRole } from '../service/userService';
 import { createBook, getAllBooks, getBookById } from '../service/bookService';
@@ -7,8 +5,10 @@ import { createBook, getAllBooks, getBookById } from '../service/bookService';
 export const createBookController = async (req: Request, res: Response) => {
   try {
     const { title, author, published_year, genre, stock, userId } = req.body;
-    //
-
+    const role = await getUserRole(userId);
+    if (role !== 'Librarian') {
+      return res.status(403).send({ message: 'Forbidden' });
+    }
     const newBook = await createBook({ title, author, published_year, genre, stock });
     res.status(201).json(newBook);
   } catch (err) {
