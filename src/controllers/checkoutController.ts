@@ -3,7 +3,7 @@ import { checkoutBook, returnBook, getCheckouts, getCheckoutDetails } from '../s
 
 export const getCheckoutDetailsController = async (req: Request, res: Response) => {
   try {
-    const checkoutDetails = await getCheckoutDetails();
+    const checkoutDetails = await getCheckoutDetails(req.params.id);
     res.json(checkoutDetails);
   } catch (err) {
     res.status(500).json({ message: err });
