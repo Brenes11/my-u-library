@@ -1,5 +1,3 @@
-// /src/controllers/userController.ts
-
 import { Request, Response } from 'express';
 import { createUser, getUserRole, getAllUsers } from '../service/userService';
 
