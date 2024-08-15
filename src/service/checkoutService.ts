@@ -42,8 +42,8 @@ export const returnBook = async (checkoutId: string) => {
   return checkout;
 };
 
-export const getCheckoutDetails = async (checkoutId: string) => {
-    const checkout = await Checkout.findById(checkoutId)
+export const getCheckoutDetails = async () => {
+    const checkout = await Checkout.find()
       .populate('book_id', 'title author published_year genre')
       .populate('user_id', 'first_name last_name email');
   
